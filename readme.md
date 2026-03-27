@@ -12,34 +12,18 @@ A lightweight, fast, and minimal toolchain with built-in SOCKS5 proxy and traffi
 This project provides a **secure tunneling solution** that combines:
 
 * **TLS encryption**
-* **SNI spoofing (domain masking)**
-* **SSH tunneling**
+* **Domain Masking**
 * **SOCKS5 proxy support**
 
-It is ideal for:
-
-* Bypassing restricted networks
-* Testing network configurations
-* Privacy-focused routing
 
 ---
 
-## ✨ Features
-
-* 🔐 TLS tunnel with **SNI spoofing**
-* 🌍 Built-in **SOCKS5 proxy server**
-* 📊 Optional **real-time traffic monitoring**
-* 🚫 **Blocklist support** (ads, trackers, unwanted domains)
-* ⚡ Fast and lightweight (minimal dependencies)
-* 🛠 Easy setup with shell scripts
-
----
 
 ## 📁 Project Structure
 
 ```id="t7q9cn"
 .
-├── tunnel.py         # TLS tunnel with SNI spoofing
+├── tunnel.py         # TLS tunnel 
 ├── socks_monitor.py  # SOCKS5 proxy + monitoring
 ├── tunnel.sh         # Start/stop tunnel
 ├── status.sh         # View stats & performance
@@ -163,15 +147,7 @@ https://github.com/zachlagden/Pi-hole-Optimized-Blocklists
 
 ---
 
-## 🔍 How TLS + SNI Spoofing Works
 
-1. Client creates a TLS connection to remote server
-2. **SNI spoofing hides the real destination domain**
-3. SSH tunnel runs securely inside TLS
-4. SOCKS5 proxy routes traffic through the tunnel
-5. Monitoring tracks bandwidth and connections
-
----
 
 ## 🛠 Troubleshooting Guide
 
@@ -194,7 +170,6 @@ kill -9 <PID>
 
 ### ⚠️ Slow Speed Fix
 
-* Try different `SNI` domains (e.g., popular sites)
 * Reduce blocklist size
 * Check network stability
 
@@ -202,7 +177,6 @@ kill -9 <PID>
 
 ## 📌 Best Practices
 
-* Use trusted SNI domains (e.g., high-traffic websites)
 * Keep blocklist optimized
 * Monitor usage regularly for performance tuning
 
@@ -212,8 +186,7 @@ kill -9 <PID>
 
 This project is for:
 
-* Educational purposes
-* Ethical security testing
+
 * Research and development
 
 🚫 Do NOT use for:
@@ -223,11 +196,6 @@ This project is for:
 
 ---
 
-## ⭐ SEO Keywords
-
-TLS Tunnel, SNI Spoofing Tool, SSH Tunnel Proxy, SOCKS5 Proxy Server, Network Bypass Tool, Firewall Bypass, Secure Tunnel Linux, Privacy Networking Tool, Encrypted Proxy
-
----
 
 ## 🤝 Contributing
 
@@ -236,11 +204,7 @@ For major changes, open an issue first to discuss improvements.
 
 ---
 
-## 📜 License
 
-MIT License
-
----
 
 ## ❤️ Support
 
