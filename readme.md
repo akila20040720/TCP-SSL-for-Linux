@@ -1,196 +1,253 @@
-# 🚀 TLS Tunnel with SNI Spoofing
+# TLS Tunnel with SNI Spoofing (SSH + SOCKS5 Proxy) 🚀
 
-A lightweight toolchain for bypassing network restrictions using **TLS + SSH tunneling**, with optional **SOCKS5 proxy monitoring** and **domain-based filtering**.
+
+A lightweight, fast, and minimal toolchain with built-in SOCKS5 proxy and traffic monitoring.
+
+
+
+---
+
+## 📌 Overview
+
+This project provides a **secure tunneling solution** that combines:
+
+* **TLS encryption**
+* **SNI spoofing (domain masking)**
+* **SSH tunneling**
+* **SOCKS5 proxy support**
+
+It is ideal for:
+
+* Bypassing restricted networks
+* Testing network configurations
+* Privacy-focused routing
 
 ---
 
 ## ✨ Features
 
 * 🔐 TLS tunnel with **SNI spoofing**
-* 🌐 Built-in **SOCKS5 proxy**
+* 🌍 Built-in **SOCKS5 proxy server**
 * 📊 Optional **real-time traffic monitoring**
-* 🚫 Domain **blocklist support (ad-blocking)**
-* ⚡ Simple shell-based management (start/status)
-* 🧩 Minimal dependencies
+* 🚫 **Blocklist support** (ads, trackers, unwanted domains)
+* ⚡ Fast and lightweight (minimal dependencies)
+* 🛠 Easy setup with shell scripts
 
 ---
 
 ## 📁 Project Structure
 
-```
+```id="t7q9cn"
 .
-├── tunnel.py         # Core TLS tunnel (SNI spoofing)
-├── socks_monitor.py  # SOCKS5 proxy + traffic monitor
-├── tunnel.sh         # Launcher script
-├── status.sh         # Status & metrics viewer
+├── tunnel.py         # TLS tunnel with SNI spoofing
+├── socks_monitor.py  # SOCKS5 proxy + monitoring
+├── tunnel.sh         # Start/stop tunnel
+├── status.sh         # View stats & performance
 ├── tunnel.conf       # Configuration file
 ```
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation Guide
 
-```bash
+### 1. Clone Repository
+
+```bash id="wq9l8c"
 git clone <your-repo-url>
 cd <your-project-folder>
+```
 
+### 2. Set Permissions
+
+```bash id="k1v9rt"
 chmod +x tunnel.sh status.sh
 ```
 
-Make sure Python 3 is installed:
+### 3. Requirements
 
-```bash
+* Python 3.x
+* Linux / macOS (or WSL)
+
+Check Python:
+
+```bash id="6cv1s2"
 python3 --version
 ```
 
 ---
 
-## 🧪 Usage
+## 🧪 Usage (Step-by-Step)
 
-### 1. Configure
+### Step 1: Configure Tunnel
 
-Edit the configuration file:
-
-```bash
+```bash id="8i4h2k"
 nano tunnel.conf
 ```
 
 ---
 
-### 2. Start Tunnel
+### Step 2: Start TLS Tunnel
 
 With monitoring:
 
-```bash
+```bash id="d2nvw7"
 ./tunnel.sh tunnel.conf
 ```
 
 Without monitoring:
 
-```bash
+```bash id="l9z3x1"
 ./tunnel.sh tunnel.conf --no-monitor
 ```
 
 ---
 
-### 3. Use the Proxy
+### Step 3: Connect via SOCKS5 Proxy
 
-Example using `curl`:
-
-```bash
+```bash id="x3m7ks"
 curl --socks5 127.0.0.1:2070 https://example.com
 ```
 
-You can also configure this SOCKS proxy in:
+You can also use:
 
-* Browser (Firefox/Chrome)
-* System network settings
-* Tools like Postman
+* Web browsers (Chrome, Firefox)
+* Postman
+* System proxy settings
 
 ---
 
-### 4. Check Status
+### Step 4: Monitor Tunnel Status
 
-```bash
+```bash id="h3n8ak"
 ./status.sh            # Full stats
-./status.sh speed      # Bandwidth only
+./status.sh speed      # Speed only
 ./status.sh --watch    # Live monitoring
 ```
 
 ---
 
-## 🧾 Configuration
+## 🧾 Configuration File (`tunnel.conf`)
 
-Example `tunnel.conf`:
-
-```ini
+```ini id="7m2vqp"
 REMOTE_HOST=<server_address>
 SSH_USER=<username>
 SSH_PASS=<password>
 SSH_PORT=<server_port>
 
-TUNNEL_PORT=9090       # Local TLS tunnel port
-SOCKS_PORT=2070        # Local SOCKS5 proxy port
+TUNNEL_PORT=9090
+SOCKS_PORT=2070
 
-SNI=google.lk          # SNI domain for spoofing
+SNI=google.lk
 
-EXPIRES=2025-12-31     # Optional expiration date
-BLOCKLIST=/path/to/blocklist.txt  # Optional domain blocking
+EXPIRES=2025-12-31
+BLOCKLIST=/path/to/blocklist.txt
 ```
 
 ---
 
-## 🚫 Blocklist Support
+## 🚫 Blocklist (Ad Blocking Support)
 
-Supports multiple formats:
+Supported formats:
 
-```
-0.0.0.0 example.com
-127.0.0.1 example.com
+```id="q8m2ke"
+0.0.0.0 ads.example.com
+127.0.0.1 tracker.example.com
 example.com
 ```
 
-* Lines starting with `#` are ignored
-* Helps block ads, trackers, or unwanted domains
+* Ignore lines starting with `#`
+* Improves performance and privacy
 
-👉 Recommended list:
+🔗 Recommended blocklist:
 https://github.com/zachlagden/Pi-hole-Optimized-Blocklists
 
 ---
 
-## 🔍 How It Works
+## 🔍 How TLS + SNI Spoofing Works
 
-1. A TLS connection is created to the remote host
-2. **SNI spoofing** masks the real destination
-3. SSH tunnel runs inside the TLS connection
-4. A local SOCKS5 proxy forwards traffic through the tunnel
-5. Optional monitoring tracks usage in real time
-
----
-
-## ⚠️ Disclaimer
-
-This tool is intended for:
-
-* Educational purposes
-* Network research
-* Privacy testing
-
-Do **not** use it to violate:
-
-* Local laws
-* ISP policies
-* Organizational security rules
+1. Client creates a TLS connection to remote server
+2. **SNI spoofing hides the real destination domain**
+3. SSH tunnel runs securely inside TLS
+4. SOCKS5 proxy routes traffic through the tunnel
+5. Monitoring tracks bandwidth and connections
 
 ---
 
-## 🛠 Troubleshooting
+## 🛠 Troubleshooting Guide
 
-**Port already in use**
+### ❌ Port Already in Use
 
-```bash
+```bash id="czx81u"
 lsof -i :2070
 kill -9 <PID>
 ```
 
-**Tunnel not connecting**
+---
 
-* Check `REMOTE_HOST`, `SSH_PORT`
-* Verify credentials
-* Ensure server allows SSH
+### ❌ Tunnel Not Connecting
 
-**Slow speed**
-
-* Try different `SNI` values
-* Check network stability
-* Reduce blocklist size
+* Verify `REMOTE_HOST` and `SSH_PORT`
+* Check username/password
+* Ensure SSH access is enabled on server
 
 ---
 
-## 📌 Tips
+### ⚠️ Slow Speed Fix
 
-* Use a trusted SNI domain (e.g., popular sites)
-* Keep your blocklist optimized for performance
-* Run `status.sh --watch` to monitor live traffic
+* Try different `SNI` domains (e.g., popular sites)
+* Reduce blocklist size
+* Check network stability
+
+---
+
+## 📌 Best Practices
+
+* Use trusted SNI domains (e.g., high-traffic websites)
+* Keep blocklist optimized
+* Monitor usage regularly for performance tuning
+
+---
+
+## ⚠️ Legal Disclaimer
+
+This project is for:
+
+* Educational purposes
+* Ethical security testing
+* Research and development
+
+🚫 Do NOT use for:
+
+* Illegal activities
+* Bypassing organizational policies without permission
+
+---
+
+## ⭐ SEO Keywords
+
+TLS Tunnel, SNI Spoofing Tool, SSH Tunnel Proxy, SOCKS5 Proxy Server, Network Bypass Tool, Firewall Bypass, Secure Tunnel Linux, Privacy Networking Tool, Encrypted Proxy
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome!
+For major changes, open an issue first to discuss improvements.
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## ❤️ Support
+
+If this project helped you:
+
+* ⭐ Star the repository
+* 🍴 Fork and improve
+* 🧑‍💻 Share with others
 
 ---
